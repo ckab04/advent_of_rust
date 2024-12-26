@@ -1,16 +1,37 @@
+use core::fmt;
+
 pub struct KidsGift {
     pub name: String,
+}
+
+impl fmt::Display for KidsGift{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+        write!(f, "{}", self.name)
+    }
 }
 
 pub struct ElvesGift {
     pub name: String,
 }
 
+impl fmt::Display for ElvesGift{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+        write!(f, "{}", self.name)
+        //f.write_str(&self.name)
+    }
+}
+
 pub struct ReindeerGift {
     pub name: String,
 }
 
-pub fn display_gift(gift: Unknown) {
+impl fmt::Display for ReindeerGift{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+        write!(f, "{}", self.name)
+    }
+}
+
+pub fn display_gift(gift: &impl fmt::Display) {
     println!("{}", gift);
 }
 
