@@ -3,17 +3,23 @@ use std::fmt;
 // 1. Add the `is_wrapped` field to the gift structs
 pub struct KidsGift {
     pub name: String,
+    is_wrapped: bool,
 }
 
 pub struct ElvesGift {
     pub name: String,
+    is_wrapped: bool,
 }
 
 pub struct ReindeerGift {
     pub name: String,
+    is_wrapped: bool,
 }
+// 2. Finish the trait definition //
 
-pub trait Gift // 2. Finish the trait definition //
+
+pub trait Gift{}
+
 
 // 3. Update the function signature
 pub fn prepare_gift<T: fmt::Display>(gift: T) {
