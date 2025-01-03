@@ -18,11 +18,14 @@ pub struct ReindeerGift {
 // 2. Finish the trait definition //
 
 
-pub trait Gift{}
+pub trait Gift{
+    fn wrap(&mut self);
+
+}
 
 
 // 3. Update the function signature
-pub fn prepare_gift<T: fmt::Display>(gift: T) {
+pub fn prepare_gift<T: fmt::Display + Gift>(gift: &mut T) {
     println!("Preparing gift for {}", &gift);
     gift.wrap();
     println!("Gift wrapped for {}", &gift);
@@ -30,9 +33,15 @@ pub fn prepare_gift<T: fmt::Display>(gift: T) {
 
 // 4. Implement the Gift trait to the gift structs
 
-impl fmt::Display for KidsGift {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl fmt::Display for KidsGift{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
         write!(f, "{}", self.name)
+    }
+}
+
+impl Gift for KidsGift{
+    fn wrap(&mut self){
+        self.is_wrapped = true;
     }
 }
 
@@ -42,9 +51,23 @@ impl fmt::Display for ElvesGift {
     }
 }
 
+
+impl Gift for ElvesGift{
+    fn wrap(&mut self){
+        self.is_wrapped = true;
+    }
+}
+
 impl fmt::Display for ReindeerGift {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.name)
+    }
+}
+
+
+impl Gift for ReindeerGift{
+    fn wrap(&mut self){
+        self.is_wrapped = true;
     }
 }
 
