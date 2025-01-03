@@ -14,10 +14,9 @@ pub struct ElvesGift {
     pub name: String,
 }
 
-impl fmt::Display for ElvesGift{
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+impl fmt::Display for ElvesGift {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.name)
-        //f.write_str(&self.name)
     }
 }
 
@@ -25,8 +24,8 @@ pub struct ReindeerGift {
     pub name: String,
 }
 
-impl fmt::Display for ReindeerGift{
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+impl fmt::Display for ReindeerGift {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.name)
     }
 }
