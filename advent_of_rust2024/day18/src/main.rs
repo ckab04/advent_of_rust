@@ -16,7 +16,7 @@ impl Default for Sleigh{
    fn default() -> Self {
        Self{
            color: "red".to_string(),
-           engine: "reindeer-powerd".to_string(),
+           engine: "reindeer-powered".to_string(),
            gift_capacity: 100,
            magical_enhancements: false
        }
@@ -31,30 +31,30 @@ impl SleighBuilder {
            }
    }
 
-   fn color(&mut self, color: &str) -> &mut Self{
+   fn color(mut self, color: &str) -> Self{
 
        self.sleigh.color = color.to_string();
        self
 
    }
 
-   fn engine(&mut self, engine: &str)  -> &mut Self{
+   fn engine(mut self, engine: &str)  -> Self{
        self.sleigh.engine = engine.to_string();
        self
    }
 
-   fn gift_capacity(&mut self, gift_capacity: u32)  -> &mut Self{
+   fn gift_capacity(mut self, gift_capacity: u32)  ->  Self{
        self.sleigh.gift_capacity = gift_capacity;
        self
    }
 
-   fn magical_enhancements(&mut self)  -> &mut Self{
+   fn magical_enhancements(mut self)  -> Self{
        self.sleigh.magical_enhancements = true;
        self
    }
 
-   fn build(&self) -> Sleigh{
-       self.sleigh.clone()
+   fn build(self) -> Sleigh{
+       self.sleigh
    }
 
 }
