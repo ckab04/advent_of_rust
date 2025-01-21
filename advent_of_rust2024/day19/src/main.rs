@@ -39,6 +39,22 @@ impl Sleigh<Empty> {
     }
 }
 
+impl Sleigh<Ready>{
+
+    pub fn take_off(self) -> Sleigh<Flying>{
+        Sleigh{ _state: PhantomData}
+    }
+    pub fn unload(self) -> Sleigh<Empty>{
+        Sleigh{ _state: PhantomData}
+    }
+}
+
+impl Sleigh<Flying> {
+    pub fn land(self) -> Sleigh<Ready>{
+        Sleigh { _state: PhantomData}
+    }
+}
+
 
 fn main(){}
 
