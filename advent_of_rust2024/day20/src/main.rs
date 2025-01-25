@@ -1,6 +1,6 @@
-// fn main() {
-//     println!("Hello, world!");
-// }
+fn main() {
+    println!("Hello, world!");
+}
 use std::marker::PhantomData;
 
 pub struct Empty;
