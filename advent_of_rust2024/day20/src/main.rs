@@ -14,14 +14,40 @@ pub trait State{
 }
 
 
+impl State for  Empty{
+    fn status() -> &'static str {
+        "Empty"
+    }
+}
+impl State for Ready{
+    fn status() -> &'static str {
+        "Ready"
+    }
+}
+
+impl State for Flying {
+    fn status() -> &'static str {
+        "Flying"
+    }
+}
 
 
+pub trait State{
+    fn status() -> &'static str;
+}
 
 pub struct Sleigh<T> {
     // This is only public for testing purposes
     // In real-world scenarios, this should be private
     pub state: PhantomData<T>,
 }
+
+impl<T: State> Sleigh<T> {
+    pub fn status(&self) -> &'static str {
+        T::status()
+    }
+}
+
 
 
 
