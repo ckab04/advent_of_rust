@@ -2,10 +2,7 @@ use std::collections::HashMap;
 
 pub struct SantaList {
     // 1. Define the records field
-
     records: HashMap<String, bool>,
-
-
 }
 
 impl SantaList {
@@ -23,6 +20,12 @@ impl SantaList {
 
     // 4. Implement the remove method
 
+    fn remove(&mut self, name: &str){
+        if self.records.contains_key(name){
+            self.records.remove(name).unwrap();
+        }
+    }
+
     // 5. Implement the get method
 
     fn get(&self, name: &str)-> Option<bool>{
@@ -39,7 +42,6 @@ impl SantaList {
                     }else{
                         (nice, naughty + 1)
                     }
-
                 }
                 );
         (nice, naughty)
@@ -47,6 +49,14 @@ impl SantaList {
 
 
     // 7. Implement the list_by_behavior method
+    fn list_by_behavior(&self, behaviour: bool) -> Vec<String> {
+        self.records
+            .iter()
+            .filter(|x| *x.1 == behaviour)
+            .map(|y| y.0.clone())
+                .collect::<Vec<String>>()
+    }
+
 }
 
 pub fn main() {
