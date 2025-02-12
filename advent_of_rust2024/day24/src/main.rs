@@ -1,4 +1,5 @@
-use std::sync::Arc;
+use std::collections::VecDeque;
+use std::sync::{Arc, Mutex};
 use std::thread;
 
 pub trait SleighTask {
@@ -6,23 +7,51 @@ pub trait SleighTask {
 }
 
 pub struct SantaSleighQueue {
-    records: // 1. Should store the tasks
+    // 1. Should store the tasks
+    records: Mutex<VecDeque<Box<dyn SleighTask>>>,
 }
 
 impl SantaSleighQueue {
     // 2. Define the `new` constructor
 
+    pub fn new() -> Self{
+        Self{
+            records: Mutex::new(VecDeque::new()),
+        }
+    }
     // 3. Define the `enqueue` method
 
+  pub  fn enqueue(&mut self, task: Box<dyn SleighTask>) {
+        let mut records = self.records.lock().unwrap();
+        records.push_back(task);
+    }
+
+
     // 4. Define the `get_task` method
+
+  pub  fn get_task(&mut self) -> Option<Box<dyn SleighTask>>{
+        let mut records = self.records.lock().unwrap();
+        records.pop_front()
+    }
+
 }
 
 pub struct ElfTask {
     // 5. Define the fields
+    name: String,
+    urgency: u32,
+
 }
 
 impl ElfTask {
     // 6. Define the `new` constructor
+   pub fn new(name: &str, urgency: u32) -> Self{
+        Self{
+            name: name.into(),
+            urgency,
+        }
+    }
+
 }
 
 impl SleighTask for ElfTask {
@@ -33,10 +62,23 @@ impl SleighTask for ElfTask {
 
 pub struct ReindeerTask {
     // 7. Define the fields
+
+    name: String,
+    weight: u32,
+
 }
 
 impl ReindeerTask {
     // 8. Define the `new` constructor
+
+    fn new(name: &str, weight: u32) -> Self{
+        Self{
+            name: name.into(),
+            weight,
+            }
+
+    }
+
 }
 
 impl SleighTask for ReindeerTask {
